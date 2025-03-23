@@ -60,6 +60,7 @@ def pzmap1(z, p, title):
     return fig, ax
 
 
+fig, ax = plt.subplots(2, 1, figsize=(6, 6))
 ###############################################################################
 def bode1(w, mag, phlin, title):
     """
@@ -72,8 +73,7 @@ def bode1(w, mag, phlin, title):
     :return: handles des éléments graphiques générés
     """
 
-    fig, ax = plt.subplots(2, 1, figsize=(6, 6))
-    fig.suptitle(title + ' Frequency Response')
+    #fig.suptitle(title + ' Frequency Response')
 
     ax[0].plot(w, mag)
     ax[0].set_xscale('log')
