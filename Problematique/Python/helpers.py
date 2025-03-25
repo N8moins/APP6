@@ -59,8 +59,8 @@ def pzmap1(z, p, title):
     ax.set_ylim(np.amin(np.imag(rootslist)) - .5, np.amax(np.imag(rootslist)) + .5)
     return fig, ax
 
-
 fig, ax = plt.subplots(2, 1, figsize=(6, 6))
+
 ###############################################################################
 def bode1(w, mag, phlin, title):
     """
@@ -79,8 +79,8 @@ def bode1(w, mag, phlin, title):
     ax[0].set_xscale('log')
     ax[0].grid(visible=None, which='both', axis='both', linewidth=0.5)
     # fixe les limites du graphiques en gardant une marge minimale
-    ax[0].set_xlim(10 ** (np.floor(np.log10(np.amin(w))) - 0.1), 10 ** (np.ceil(np.log10(np.amax(w))) + .1))
-    ax[0].set_ylim(20 * (np.floor(np.amin(mag) / 20 - 0.1)), 20 * (np.ceil(np.amax(mag) / 20 + .1)))
+    ax[0].set_xlim(500, 500000)
+    ax[0].set_ylim(-1, 1 * (np.ceil(np.amax(mag) / 1 + .1)))
     ax[0].set_ylabel('Amplitude [dB]')
 
     ax[1].plot(w, phlin)
