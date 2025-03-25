@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.signal as signal
 import helpers as hp
+from helpers import bodeplot
 
 
 def problematique():
@@ -22,10 +23,10 @@ def problematique():
 
 
     z_pb, p_pb, k_pb = signal.tf2zpk(num_pb, den_pb)
-    hp.pzmap1(z_pb, p_pb, 'Passe bas')
+    #hp.pzmap1(z_pb, p_pb, 'Passe bas')
 
     z_ph, p_ph, k_ph = signal.tf2zpk(num_ph, den_ph)
-    hp.pzmap1(z_ph, p_ph, 'Passe haut')
+    #hp.pzmap1(z_ph, p_ph, 'Passe haut')
 
     num_pb2, den_pb2 = signal.butter(2, wc_pb2, 'low', analog=True)
     num_ph2, den_ph2 = signal.butter(2, wc_ph2, 'high', analog=True)
@@ -35,6 +36,9 @@ def problematique():
 
     zs, ps, ks = hp.seriestf(z_pb2, p_pb2, k_pb2, z_ph2, p_ph2, k_ph2)
     hp.pzmap1(zs, ps, 'passe bande')
+
+    num_s, den_s = signal.zpk2tf(zs,ps,ks)
+    hp.bodeplot(num_s, den_s, 'lieu de bode du passe bande')
 
     zp, pp, kp = hp.paratf(z_pb, p_pb, k_pb*-1, z_ph, p_ph, k_ph*-1)
 

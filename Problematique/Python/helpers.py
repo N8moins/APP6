@@ -59,7 +59,6 @@ def pzmap1(z, p, title):
     ax.set_ylim(np.amin(np.imag(rootslist)) - .5, np.amax(np.imag(rootslist)) + .5)
     return fig, ax
 
-fig, ax = plt.subplots(2, 1, figsize=(6, 6))
 
 ###############################################################################
 def bode1(w, mag, phlin, title):
@@ -73,14 +72,15 @@ def bode1(w, mag, phlin, title):
     :return: handles des éléments graphiques générés
     """
 
-    #fig.suptitle(title + ' Frequency Response')
+    fig, ax = plt.subplots(2, 1, figsize=(6, 6))
+    fig.suptitle(title + ' Frequency Response')
 
     ax[0].plot(w, mag)
     ax[0].set_xscale('log')
     ax[0].grid(visible=None, which='both', axis='both', linewidth=0.5)
     # fixe les limites du graphiques en gardant une marge minimale
     ax[0].set_xlim(500, 500000)
-    ax[0].set_ylim(-1, 1 * (np.ceil(np.amax(mag) / 1 + .1)))
+    ax[0].set_ylim(-5, 5 * (np.ceil(np.amax(mag) / 5 + .1)))
     ax[0].set_ylabel('Amplitude [dB]')
 
     ax[1].plot(w, phlin)
